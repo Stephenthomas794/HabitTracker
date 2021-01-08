@@ -10,13 +10,13 @@ class HomePage extends Component {
     constructor() {
     super();
     this.state = {
-            user: undefined,
             email: undefined,
             name: undefined,
             password: undefined,
             confirmPassword: undefined
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.setEmail = this.setEmail.bind(this)
     }
 
 handleSubmit(email, name, password, confirmPassword){
@@ -26,6 +26,15 @@ handleSubmit(email, name, password, confirmPassword){
         password: password,
         confirmPassword: confirmPassword
     })
+    console.log("HomePage", this.state.email)
+}
+
+setEmail(newEmail){
+    this.setState({
+       email:newEmail
+    })
+    this.props.setEmail(this.state.email)
+    console.log("HomePage", this.state.email)
 }
     render() {
     return (
@@ -45,7 +54,7 @@ handleSubmit(email, name, password, confirmPassword){
                 <tbody>
                 <tr>
                 <td>
-                    <SignIn />
+                    <SignIn setEmail = {this.setEmail} />
                     <Space />
                     <Auth />
                 </td>

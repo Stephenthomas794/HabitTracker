@@ -31,7 +31,27 @@ class Add extends Component {
     this.setState({ timesPerDay: event.target.value })
 
     }
+    handleFormSubmit(event){
+    this.setState({nameOfHabit: event.target.value})
+    this.setState({timesPerDay: event.target.value})
 
+    const data = {nameOfHabit: this.state.nameOfHabit, timesPerDay: this.state.timesPerDay}
+
+    fetch('http://127.0.0.1:5000/api/addEntry', {
+        crossDomain: true,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+         console.log('Success:', data);
+        })
+    }
+    
     render() {
 
     return (

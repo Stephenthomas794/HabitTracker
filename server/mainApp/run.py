@@ -25,9 +25,10 @@ def create():
         try: 
             db.session.add(newUser)
             db.session.commit()
-            jack = users.query.all()
-            print (jack)
-            db2.db2.collection.insert_one({"name": "John"})
+            AllUsers = users.query.all()
+            print (AllUsers)
+            habit_collection = mongo.db.users
+            habit_collection.insert({'email' : request_data['email']})
             return jsonify(message="Success Posting to Database")
         except:
             return jsonify(message="Failed Posting to Database")
@@ -73,4 +74,30 @@ def existingUser(checkEmail):
     else: 
         return True #If the user does exist 
     return
+
+#@run.route('/api/addEntry', methods=['GET','POST'])
+#def addEntry():
+#    request_data = json.loads(request.data)
+#    print(request_data)
+#    habit_collection = mongo.db.users
+#    habit.collection.update_one({"email": request_data['email'], {"$set": {"Habit": request_data['nameOfHabit'], "NumberOfTimes": request_data['timesPerDay'], "Total": 0}}})
+#    return "Done"
+
+#@run.route('/api/pullHabits')
+#def pullHabits():
+#    request_data = json.loads(request.data)
+#    habit_collection = mongo.db.users
+#    result = habit_collection.find({"email": request_data['email'], "Habit"})
+#    print (result)
+#    return
+
+#@run.route('/api/pullAll')
+
+
+
+
+
+
+
+
 

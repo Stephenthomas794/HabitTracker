@@ -28,8 +28,6 @@ handlePasswordChange(event){
 handleFormSubmit(event){
     event.preventDefault();
     
-    this.setState({ email: event.target.value })
-    this.setState({ password: event.target.value })
     const data = { email: this.state.email, password: this.state.password }
     console.log(data);
     fetch('http://127.0.0.1:5000/api/signIn', {
@@ -50,6 +48,8 @@ handleFormSubmit(event){
         } else if (data.message === false){
             window.alert("The password you entered does not match what we have on file");
         } else{
+        console.log(this.state.email)
+        this.props.setEmail(this.state.email) 
         this.props.history.push('/email');
         }
         })
