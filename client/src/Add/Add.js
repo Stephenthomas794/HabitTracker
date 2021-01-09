@@ -10,7 +10,7 @@ class Add extends Component {
     super();
     this.state = {
         nameOfHabit:  undefined,
-        timesPerDay: undefined
+        timesPerDay: 1
 
     }
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -31,12 +31,12 @@ class Add extends Component {
     this.setState({ timesPerDay: event.target.value })
 
     }
+
     handleFormSubmit(event){
-    this.setState({nameOfHabit: event.target.value})
-    this.setState({timesPerDay: event.target.value})
+    event.preventDefault();
 
-    const data = {nameOfHabit: this.state.nameOfHabit, timesPerDay: this.state.timesPerDay}
-
+    const data = {email: this.props.email, nameOfHabit: this.state.nameOfHabit, timesPerDay: this.state.timesPerDay}
+    console.log(data)
     fetch('http://127.0.0.1:5000/api/addEntry', {
         crossDomain: true,
         method: 'POST',
@@ -80,13 +80,15 @@ class Add extends Component {
         </td>
         <td>
             <Form.Group controlId="exampleForm.ControlSelect1">
-                <Form.Control as="select" >
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
+                <Form.Control as="select" 
+                required  value = { this.state.timesPerDay }
+                onChange={ this.handleTimesPerDay }  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
                 </Form.Control>
            </Form.Group>
         </td> 

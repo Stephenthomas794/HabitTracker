@@ -26,7 +26,6 @@ handleSubmit(email, name, password, confirmPassword){
         password: password,
         confirmPassword: confirmPassword
     })
-    console.log("HomePage", this.state.email)
 }
 
 setEmail(newEmail){
@@ -34,7 +33,6 @@ setEmail(newEmail){
        email:newEmail
     })
     this.props.setEmail(this.state.email)
-    console.log("HomePage", this.state.email)
 }
     render() {
     return (

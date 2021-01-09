@@ -75,21 +75,27 @@ def existingUser(checkEmail):
         return True #If the user does exist 
     return
 
-#@run.route('/api/addEntry', methods=['GET','POST'])
-#def addEntry():
-#    request_data = json.loads(request.data)
-#    print(request_data)
-#    habit_collection = mongo.db.users
-#    habit.collection.update_one({"email": request_data['email'], {"$set": {"Habit": request_data['nameOfHabit'], "NumberOfTimes": request_data['timesPerDay'], "Total": 0}}})
-#    return "Done"
+@run.route('/api/addEntry', methods=['GET','POST'])
+def addEntry():
+    request_data = json.loads(request.data)
+    print(request_data)
+    habit_collection = mongo.db.users
+    habit_collection.update_one({"email": request_data['email']}, {"$push": {"nameOfHabit": request_data['nameOfHabit'], "timesPerDay": request_data['timesPerDay'], "Total": 0 }})
+    return jsonify(message="Done")
 
-#@run.route('/api/pullHabits')
-#def pullHabits():
-#    request_data = json.loads(request.data)
-#    habit_collection = mongo.db.users
-#    result = habit_collection.find({"email": request_data['email'], "Habit"})
-#    print (result)
-#    return
+@run.route('/api/pullHabits', methods=['GET','POST'])
+def pullHabits():
+    request_data = json.loads(request.data)
+    habit_collection = mongo.db.users
+    result = habit_collection.find({"email": request_data['email']})
+    print(result)
+    for r in result:
+        nameOfHabit = r['nameOfHabit']
+        timesPerDay = r['timesPerDay']
+        Total = r['Total']
+    print(nameOfHabit)
+    print(Total)
+    return jsonify(nameOfHabit=nameOfHabit, timesPerDay=timesPerDay, Total=Total)
 
 #@run.route('/api/pullAll')
 

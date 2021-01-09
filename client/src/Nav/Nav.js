@@ -15,7 +15,6 @@ class Nav extends Component {
     this.setState({
     email: this.props.email
     })
-    console.log("Nav",this.state.email)
     }
 
     componentDidUpdate(preProps){
@@ -23,7 +22,6 @@ class Nav extends Component {
         this.setState({
             email: this.props.email
         })
-     console.log("Nav2",this.state.email)
     }
     }
 

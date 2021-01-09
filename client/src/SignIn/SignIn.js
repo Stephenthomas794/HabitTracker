@@ -29,7 +29,6 @@ handleFormSubmit(event){
     event.preventDefault();
     
     const data = { email: this.state.email, password: this.state.password }
-    console.log(data);
     fetch('http://127.0.0.1:5000/api/signIn', {
         crossDomain: true,
         mode: 'cors',
@@ -48,7 +47,6 @@ handleFormSubmit(event){
         } else if (data.message === false){
             window.alert("The password you entered does not match what we have on file");
         } else{
-        console.log(this.state.email)
         this.props.setEmail(this.state.email) 
         this.props.history.push('/email');
         }

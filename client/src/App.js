@@ -22,18 +22,12 @@ class App extends Component {
             confirmPassword: undefined
         }
         this.setEmail = this.setEmail.bind(this)
-        this.getEmail = this.getEmail.bind(this)
     }
 
 setEmail(email){
     this.setState({
         email: email
     })
-    console.log("App",this.state.email)
-}
-
-getEmail(){
-    return this.state.email
 }
 
 render() {
@@ -45,7 +39,7 @@ render() {
 
         <Switch> 
             <Route path="/" component={(routeProps)=> <HomePage setEmail={this.setEmail} {...routeProps} /> } exact/>
-            <Route path="/email" component={ LandPage } />
+            <Route path="/email" component={(routeProps)=> <LandPage email={this.state.email} {...routeProps} /> } />
             <Route component= { Error } /> 
         </Switch>
 
