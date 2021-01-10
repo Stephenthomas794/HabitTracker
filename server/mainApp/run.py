@@ -75,6 +75,32 @@ def existingUser(checkEmail):
         return True #If the user does exist 
     return
 
+@run.route('/api/google', methods=['GET','POST'])
+def google():
+    request_data = json.loads(request.data)
+    status = existingUser(request_data['email'])
+    if status == False:
+        newUser = users(emails = request_data['email'], names = 'GoogleUser', passwords = 'google')
+        try:
+            db.session.add(newUser)
+            db.session.commit()
+            AllUsers = users.query.all()
+            print (AllUsers)
+            habit_collection = mongo.db.users
+            habit_collection.insert({'email' : request_data['email'], "nameOfHabit": [], "timesPerDay": [], "Total": []})
+            return jsonify(message="Success Posting to Database")
+        except:
+            return jsonify(message="Failed Posting to Database")
+    else:
+        return jsonify(message=True)
+
+def existingUser(checkEmail):
+    status = users.query.filter_by(emails=checkEmail).first()
+    if status == None:
+        return False
+    else: 
+        return True
+
 @run.route('/api/addEntry', methods=['GET','POST'])
 def addEntry():
     request_data = json.loads(request.data)

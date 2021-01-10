@@ -17,6 +17,7 @@ class HomePage extends Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.setEmail = this.setEmail.bind(this)
+        this.setEmailObj = this.setEmailObj.bind(this);
     }
 
 handleSubmit(email, name, password, confirmPassword){
@@ -26,6 +27,13 @@ handleSubmit(email, name, password, confirmPassword){
         password: password,
         confirmPassword: confirmPassword
     })
+}
+
+setEmailObj(obj){
+    this.setState({
+        email: obj
+    })
+    this.props.setEmail(this.state.email)
 }
 
 setEmail(newEmail){
@@ -54,7 +62,7 @@ setEmail(newEmail){
                 <td>
                     <SignIn setEmail = {this.setEmail} />
                     <Space />
-                    <Auth />
+                    <Auth setEmail = {this.setEmail} />
                 </td>
                 <td>
                     <Sign handle={this.handleSubmit} /> 
