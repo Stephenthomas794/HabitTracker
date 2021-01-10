@@ -5,6 +5,7 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
+    <meta name="google-signin-client_id" content="931153056282-750tm4j5ehreopjf5db02huk0v4gg3ac.apps.googleusercontent.com">
     <meta
       name="description"
       content="Web site created using create-react-app"
@@ -24,7 +25,20 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>StephenTracker</title>
-  </head>
+<!--
+<script src="https://apis.google.com/js/api.js" async defer></script>
+<script src="https://apis.google.com/js/client.js" async defer></script>
+-->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!--
+<script>
+window.onLoadCallback = function(){
+  gapi.auth2.init({
+      client_id: '931153056282-750tm4j5ehreopjf5db02huk0v4gg3ac.apps.googleusercontent.com'
+    });
+</script>
+-->
+    </head>
   <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>

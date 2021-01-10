@@ -37,13 +37,11 @@ componentDidMount(){
 }
 
 handleAddTotal(event) {
-    console.log(event.target.value);
     this.handleGetEntry(event.target.value) 
 }
 
 handleGetEntry(index){
     const data = {"email" : this.props.email, "index" : index};
-    console.log("data", data)
     fetch('http://127.0.0.1:5000/api/getEntry', {
         crossDomain: true,
         mode: 'cors',
@@ -76,20 +74,17 @@ handleLoad() {
         })
         .then(response => response.json())
         .then(data => {
-        console.log('There are no Habits to Pull', data);
+        console.log('Success', data);
         if (data.message !== false){
             var len = data.['nameOfHabit'].length;
             var size = Object.keys(data['nameOfHabit']).length;
-            console.log(len, size)
             var list = []
             for (var i = 0; i < len; i++){
                 list.push(this.handlePopulate(data, i))
-                console.log(i)
              }   
             this.setState({
                 list: list
             })
-            console.log("habit", this.state.list)
             this.forceUpdate();
             }
     })

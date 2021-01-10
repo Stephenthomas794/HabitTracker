@@ -35,7 +35,6 @@ class Add extends Component {
     }
 
     handleAddTotal(event) {
-    console.log(event.target.value);
     this.handleGetEntry(event.target.value) 
     }   
 
@@ -75,7 +74,6 @@ class Add extends Component {
         .then(data => {
         console.log('Success', data);
         if (data.message !== false){
-            console.log(data['nameOfHabit'].length);
             let len = data['nameOfHabit'].length;
             var list = []
             for (var i = 0; i < len; i++){
@@ -85,7 +83,6 @@ class Add extends Component {
             this.setState({
                 list: list
             })
-            console.log("add", this.state.list)
             this.props.updateList(list)
         }
     })
@@ -96,7 +93,6 @@ class Add extends Component {
     event.preventDefault();
 
     const data = {email: this.props.email, nameOfHabit: this.state.nameOfHabit, timesPerDay: this.state.timesPerDay}
-    console.log(data)
     fetch('http://127.0.0.1:5000/api/addEntry', {
         crossDomain: true,
         method: 'POST',
