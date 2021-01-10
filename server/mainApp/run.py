@@ -28,7 +28,7 @@ def create():
             AllUsers = users.query.all()
             print (AllUsers)
             habit_collection = mongo.db.users
-            habit_collection.insert({'email' : request_data['email']})
+            habit_collection.insert({'email' : request_data['email'], "nameOfHabit": [], "timesPerDay": [], "Total": []})
             return jsonify(message="Success Posting to Database")
         except:
             return jsonify(message="Failed Posting to Database")
@@ -80,7 +80,14 @@ def addEntry():
     request_data = json.loads(request.data)
     print(request_data)
     habit_collection = mongo.db.users
-    habit_collection.update_one({"email": request_data['email']}, {"$push": {"nameOfHabit": request_data['nameOfHabit'], "timesPerDay": request_data['timesPerDay'], "Total": 0 }})
+    habit_collection.update_one(
+
+        {"email": request_data['email']}, {
+            "$push": { 
+                    "nameOfHabit": request_data['nameOfHabit'],
+                    "timesPerDay": request_data['timesPerDay'], 
+                    "Total": 0
+                     }})
     return jsonify(message="The Entry has been added to DB")
 
 @run.route('/api/pullHabits', methods=['GET','POST'])
@@ -108,16 +115,24 @@ def getEntry():
     request_data = json.loads(request.data)
     habit_collection = mongo.db.users
     result = habit_collection.find_one({"email": request_data['email']})
-    print(result)
+   # print(result)
     num = int(request_data['index'])
     nameOfHabit = result['nameOfHabit'][num]
     timesPerDay = result['timesPerDay'][num]
-    Total = result['Total'][int(num)]
-    Total = Total + 1
-    print(nameOfHabit)
-    print(timesPerDay)
-    print(Total)
-    habit_collection.update_one({"email": request_data['email']}, {"$set": {"nameOfHabit": nameOfHabit, "timesPerDay": timesPerDay, "Total": Total }})
+    Total = result['Total'][num]
+    temp = int(Total) + 1
+    Total = str(temp)
+    update = { "$set": {} }
+    update["$set"]["Total.{}".format(num)] = Total;
+    habit_collection.update(
+        {"email": request_data['email']}, update)
+ 
+  #      {"email": request_data['email']}, {
+  #          "$set": {
+  #              "Total": [Total],
+  #                  "$position": num
+  #                  }
+  #                  })
     return jsonify(nameOfHabit=nameOfHabit, timesPerDay=timesPerDay, Total=Total)
 
 

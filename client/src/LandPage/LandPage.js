@@ -77,11 +77,13 @@ handleLoad() {
         .then(data => {
         console.log('There are no Habits to Pull', data);
         if (data.message !== false){
-            let len = data['nameOfHabit'].length;
+            var len = data.['nameOfHabit'].length;
+            var size = Object.keys(data['nameOfHabit']).length;
+            console.log(len, size)
             var list = []
             for (var i = 0; i < len; i++){
                 list.push(this.handlePopulate(data, i))
-
+                console.log(i)
              }   
             this.setState({
                 list: list

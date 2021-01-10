@@ -33,11 +33,30 @@ class Add extends Component {
     this.setState({ timesPerDay: event.target.value })
 
     }
+
     handleAddTotal(event) {
     console.log(event.target.value);
-//    handleGetEntry(event.target.value) 
-    console.log(this.props.email);
-}
+    this.handleGetEntry(event.target.value) 
+    }   
+
+    handleGetEntry(index){
+    const data = {"email" : this.props.email, "index" : index};
+    console.log("data", data)
+    fetch('http://127.0.0.1:5000/api/getEntry', {
+        crossDomain: true,
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },  
+        body: JSON.stringify(data),
+        })  
+        .then(response => response.json())
+        .then(data => {
+        console.log('Success', data);                                                                                                           
+    })
+    }
 
     handlePullData(){
     const data = { "email": this.props.email }
