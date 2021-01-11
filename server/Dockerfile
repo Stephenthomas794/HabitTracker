@@ -1,13 +1,10 @@
-FROM python: 3.9.0
+FROM python:3.9.0
 
 MAINTAINER stephenthomas794@gmail.com
 
 WORKDIR /server
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-COPY . /mainApp
+COPY . /server
 
 RUN pip3 install --upgrade pip  
 
