@@ -1,0 +1,19 @@
+FROM pyhton: 3.9.0
+
+MAINTAINER stephenthomas794@gmail.com
+
+WORKDIR /server
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+COPY . /mainApp
+
+RUN pip3 install --upgrade pip  
+
+RUN pip3 --no-cache-dir install -r requirements.txt
+
+COPY ./mainApp/run.py /mainApp/run.py
+COPY ./mainApp/extensions.py /mainApp/extensions.py 
+COPY ./mainApp/models.py /mainApp/models.py
+COPY ./mainApp/settings.py /mainApp/settings.py

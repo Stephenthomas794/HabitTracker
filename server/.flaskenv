@@ -1,2 +1,2 @@
-FLASK_APP =/Users/stephenthomas/Desktop/HabitTrackerreact/server/mainApp
-FLASK_ENV = development
+FLASK_APP = /home/ec2-user/HabitTracker/server/mainApp
+FLASK_ENV = production
