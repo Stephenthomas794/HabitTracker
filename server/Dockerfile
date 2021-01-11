@@ -13,8 +13,6 @@ RUN pip3 install --upgrade pip
 
 RUN pip3 --no-cache-dir install -r requirements.txt
 
-COPY ./.env .env
-COPY ./.flaskenv .flaskenv
 COPY ./mainApp/run.py /mainApp/run.py
 COPY ./mainApp/extensions.py /mainApp/extensions.py 
 COPY ./mainApp/models.py /mainApp/models.py
