@@ -162,7 +162,8 @@ def getEntry():
     return jsonify(nameOfHabit=nameOfHabit, timesPerDay=timesPerDay, Total=Total)
 
 
-
+if __name__ == '__main__':
+    run.run(debug=True)
 
 
 
