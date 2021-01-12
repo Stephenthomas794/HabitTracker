@@ -14,12 +14,14 @@ services:
         build:
             context: ./server
             dockerfile: Dockerfile
-        command: gunicorn -k gevent mainApp.run:app --bind 0.0.0.0:8080
+        command: gunicorn mainApp:create_app() --bind 0.0.0.0:8080
         container_name: server
         restart: always
         environment: 
             - APP_NAME=StephenTracker
-            - MONGO_URI='mongodb+srv://Admin:2QK8k4NSi21ZGZK2@usersinfo.tvi7l.mongodb.net/UsersInfo?retryWrites=true&w=majority'
-            - SQLALCHEMY_DATABASE_URI='sqlite:///HabitTracker.db'
+            - MONGO_URI=mongodb+srv://Admin:2QK8k4NSi21ZGZK2@usersinfo.tvi7l.mongodb.net/UsersInfo?retryWrites=true&w=majority
+            - SQLALCHEMY_DATABASE_URI=sqlite:///HabitTracker.db
         expose:
             - 8080
+        env_file:
+            - server/.env
