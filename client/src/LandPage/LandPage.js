@@ -42,7 +42,7 @@ handleAddTotal(event) {
 
 handleGetEntry(index){
     const data = {"email" : this.props.email, "index" : index};
-    fetch('http://127.0.0.1:5000/api/getEntry', {
+    fetch('${process.env.REACT_APP_API_PROXY}/api/getEntry', {
         crossDomain: true,
         mode: 'cors',
         method: 'POST',
@@ -62,7 +62,7 @@ handleGetEntry(index){
 
 handleLoad() {
     const data = { "email": this.props.email }
-    fetch('http://127.0.0.1:5000/api/pullHabits', {
+    fetch('${process.env.REACT_APP_API_PROXY}/api/pullHabits', {
         crossDomain: true,
         mode: 'cors',
         method: 'POST',

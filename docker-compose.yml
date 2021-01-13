@@ -9,13 +9,14 @@ services:
         ports: 
             - '80:80'
             - '443:443'
-        
-    server:
+        environment: 
+            - REACT_APP_API_PROXY=http://backend:8080/
+    backend:
         build:
             context: ./server
             dockerfile: Dockerfile
         command: gunicorn mainApp:create_app() --bind 0.0.0.0:8080
-        container_name: server
+        container_name: backend
         restart: always
         environment: 
             - APP_NAME=StephenTracker

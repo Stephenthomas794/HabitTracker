@@ -29,7 +29,7 @@ handleFormSubmit(event){
     event.preventDefault();
     
     const data = { email: this.state.email, password: this.state.password }
-    fetch('http://127.0.0.1:5000/api/signIn', {
+    fetch('${process.env.REACT_APP_API_PROXY}/api/signIn', {
         crossDomain: true,
         mode: 'cors',
         method: 'POST',

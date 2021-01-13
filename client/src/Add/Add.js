@@ -41,7 +41,7 @@ class Add extends Component {
     handleGetEntry(index){
     const data = {"email" : this.props.email, "index" : index};
     console.log("data", data)
-    fetch('http://127.0.0.1:5000/api/getEntry', {
+    fetch('${process.env.REACT_APP_API_PROXY}/api/getEntry', {
         crossDomain: true,
         mode: 'cors',
         method: 'POST',
@@ -60,7 +60,7 @@ class Add extends Component {
 
     handlePullData(){
     const data = { "email": this.props.email }
-    fetch('http://127.0.0.1:5000/api/pullHabits', {
+    fetch('${process.env.REACT_APP_API_PROXY}/api/pullHabits', {
         crossDomain: true,
         mode: 'cors',
         method: 'POST',
@@ -93,7 +93,7 @@ class Add extends Component {
     event.preventDefault();
 
     const data = {email: this.props.email, nameOfHabit: this.state.nameOfHabit, timesPerDay: this.state.timesPerDay}
-    fetch('http://127.0.0.1:5000/api/addEntry', {
+    fetch('${process.env.REACT_APP_API_PROXY}/api/addEntry', {
         crossDomain: true,
         method: 'POST',
         headers: {

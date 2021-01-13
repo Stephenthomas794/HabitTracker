@@ -57,7 +57,7 @@ handleFormSubmit(event){
     
         const data = { email: this.state.email, name: this.state.name, password: this.state.password, confirmPassword: this.state.confirmPassword }
     
-        fetch('http://127.0.0.1:5000/api/create', {
+        fetch('${process.env.REACT_APP_API_PROXY}/api/create', {
             crossDomain:true,
             method: 'POST',
             headers: {

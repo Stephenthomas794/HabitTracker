@@ -14,7 +14,6 @@ COPY . /client/src/app
 
 RUN npm run build
 
-
 FROM nginx:alpine
 
 RUN rm /etc/nginx/conf.d/default.conf

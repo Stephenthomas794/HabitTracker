@@ -36,7 +36,7 @@ class Auth extends Component {
     }
     console.log(response.profileObj.email);
     const data = {email: response.profileObj.email}
-    fetch('http://127.0.0.1:5000/api/google', {
+    fetch('${process.env.REACT_APP_API_PROXY}/api/google', {
         crossDomain: true,
         mode: 'cors',
         method: 'POST',
