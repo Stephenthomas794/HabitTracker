@@ -12,6 +12,8 @@ RUN npm install
 
 COPY . /client/src/app
 
+ENV REACT_APP_API_PROXY=
+
 RUN npm run build
 
 FROM nginx:alpine
